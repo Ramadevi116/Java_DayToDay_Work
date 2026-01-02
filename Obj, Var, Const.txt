@@ -1,0 +1,140 @@
+Agenda :
+
+Class & Object
+Variables
+Constructor
+
+
+--->Class & Object : For one class, we can create many objects in java.
+
+Class: Blueprint
+
+package Examples;
+
+public class ExampleOne { // Class
+	
+	String name="hari"; // Variable
+	
+	public void massages() { // Method 1
+		System.out.println(name+" got a new massage.");
+	}
+	public void phoneCalls() { // Method 2
+		System.out.println(name+" to busy");
+	}
+        public void msgTxt() {
+		System.out.println(msg);
+	}
+
+}
+
+object: real instances. Each object has separate memory.
+
+package Examples;
+
+public class MainClass {
+
+	public static void main(String[] args) { // Main Class
+
+		ExampleOne exp=new ExampleOne(); // Object creation
+		exp.massages();  // Method calls
+		exp.phoneCalls();
+                exp.msg="Hello"; 
+		exp.msgTxt();
+		
+		ExampleOne exp1=new ExampleOne();
+		exp1.msg="Hii";
+		exp1.msgTxt();
+
+	}
+
+}
+
+
+--->Variables: Container Used to store data.
+Memory - stack
+
+1) Local variable: Inside method, constructor and block.
+
+package Examples;
+
+public class ExampleOne {
+	
+ public void m1() {
+	 int count =1;                     // Local variable
+	 String msg =" rank";
+	 
+	 System.out.println(count+msg);
+	 
+ }
+
+}
+
+Instance Varible: Inside the class and Outside the method.
+memory - heap
+
+public class ExampleOne {
+
+         int count =1;                     // Instance variable
+	 String msg =" rank";
+	 
+ public void m1() {
+
+	 System.out.println(count+msg);
+	 
+ }
+
+}
+
+Static varible: using static keyword. Inside the class.
+memory - method area.
+Directly we can call with class name.
+Memory allocation happens only once, when class is loaded.
+
+
+--->Constructor : Is a method that initializes an object at the time of object creation.
+->Same as class name.
+->No return type.
+->called automatically.(Default)
+
+public class ExampleOne {
+	int id;
+	String name;
+
+ public ExampleOne(){                       // Default Constructor
+
+}
+	
+ public ExampleOne(int id, String name) {   // parameterized Constructor
+	 this.id=id;
+	 this.name=name;
+	 
+ }
+ public void m1() {
+	 System.out.println(id+" "+name);
+	 
+ }
+
+}
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		ExampleOne exp=new ExampleOne(121,"hari"); 
+		exp.m1();
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
