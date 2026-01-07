@@ -1,0 +1,175 @@
+Agenda: OOPs concept
+
+--->Inheritance/Is -a Relationship: One class is allowed to inherit the features of the another class.
+				    Extends keyword used.
+Types: 
+->Single 
+->Multi Level 
+->Hierarchical
+->Hybrid
+->Multiple
+
+
+Exp: Employee - Permanent emp salary and Contract emp salary calculation.
+
+package inheritance;
+
+public class Employee {
+	
+	String name;
+
+}
+
+package inheritance;
+
+public class PermanentEmployee extends Employee {
+	
+	double basicSalary;
+	double addExtra;
+	double pf;
+	double total;
+	
+	public PermanentEmployee(String name, double basicSalary) {
+		this.name=name;
+		this.basicSalary=basicSalary;
+		}
+	
+	public void salary() {
+		addExtra=basicSalary*0.20;
+		pf=basicSalary*0.10;
+		total=basicSalary+addExtra+pf;
+		System.out.println("name ="+name+". Total salary "+total);
+	}
+
+}
+
+
+package inheritance;
+
+public class ContractEmployee extends Employee {
+
+	double hourAmt;
+	double time;
+	double total;
+	
+	public ContractEmployee(String name, double hourAmt, double time) {
+		this.name=name;
+		this.hourAmt=hourAmt;
+		this.time=time;
+	}
+	
+	public void salary() {
+		total=hourAmt*time;
+		System.out.println("name ="+name+". Total salary "+ total);
+	}
+	
+}
+
+
+package inheritance;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		PermanentEmployee emp1=new PermanentEmployee("Hari",50000);
+		ContractEmployee emp2=new ContractEmployee("Rama",1000,40);
+		
+		emp1.salary();
+		emp2.salary();
+
+	}
+
+}
+
+--->Encapsulation/Data hiding: Wrapping of data and methods together and hiding the data.
+
+To steps :Variables as private.
+          Provide Setters and getters.
+	  
+
+example: To access bank balance we must use deposit() and withdraw() or checkbalance().
+
+package encapsulation;
+
+public class Pojo {
+	
+	private double amount;
+	
+	public double getAmount() {
+		return amount;
+	}
+	
+	public void setAmount(double amount) {
+		this.amount=amount;
+	}
+
+}
+
+package encapsulation;
+
+public class Account {
+	
+//	private double amount;
+//	
+//	public Account(double amount) {
+//		this.amount=amount;
+//	}
+	
+	
+	public void deposit(Pojo amount, double amt) {
+		
+		if(amt>0) {
+			amount.setAmount(amount.getAmount()+amt);
+			System.out.println(amount.getAmount());
+		}
+	}
+	
+	public void withdraw(Pojo amount,double amt) {
+		if(amt>=0 && amt<=amount.getAmount()) {
+			amount.setAmount(amount.getAmount()-amt);
+			System.out.println(amount);
+		}else {
+			System.out.println("Insufficient balance");
+		}
+	}
+	
+	public void checkbalance(Pojo amount) {
+		System.out.println(amount.getAmount());
+	}
+
+}
+
+package encapsulation;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		
+		Pojo amount=new Pojo();
+		amount.setAmount(2000);
+		
+		Account account=new Account();
+		
+		account.deposit(amount,30000);
+		account.withdraw(amount,5000);
+		account.checkbalance(amount);
+
+	}
+}
+
+
+--->Polymorphism: Many forms. Allows one method name to perform different behaviours.
+
+2 types: Method overloading/compile time/static.
+	 Method overriding/runtime/dynamic.
+
+Method overloading : Same method name and different arguments.
+Method overriding : Enabling a child class to change the behaviour of a parent class method.
+Upcasting - Reference variable of parent class refers to the object child class.
+Covariant return type - return type of child class should be same as parent class.
+
+
+
+
+
