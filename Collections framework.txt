@@ -1,0 +1,256 @@
+Agenda : Java Collections Framework.
+
+
+Collection framework is set of classes and interfaces used to store or manage group of object.
+
+Collection<I>-->List<I> -->ArrayList<C>, LinkedList<C>, Stack<C>, Vector<C>, CopyOnWriteArrayList<C>
+	     -->Set<I> -->HashSet<C>, LinkedHashSet<C>, SortedSet<I>, TreeSet<C>
+             -->Queue<I> -->PriorityQueue<C>, Deque<I>, ArrayDeque<C>
+
+	     -->Map<I> -->HashMap<C>, LinkedHashMap<C>, HashTable<I>, SortedMap<I>, TreeMap<C>
+
+
+-->List<I> : 
+===========
+
+ArrayList<C> : ArrayList<Object> array=new ArrayList<Object>();
+===========
+
+ex: 
+
+package arrayList;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+
+
+public class ArrayListCreation {
+	public static void main(String args[]) {
+	ArrayList<Integer> arr=new ArrayList<Integer>();
+	arr.add(10);
+	arr.add(32);
+	arr.add(16);
+	arr.add(7);
+	//System.out.println(arr.get(2));
+	
+	//For loop
+	
+	for(int i=0;i<=arr.size()-1;i++) {
+		System.out.println(arr.get(i));
+	}
+	
+	//For Each
+	
+	for(Integer i : arr) {
+		System.out.println(i);
+	}
+	
+	//Lambda
+	
+	arr.stream().forEach(in->System.out.println(in));
+	
+	//Iterator
+	
+	Iterator<Integer> ar=arr.iterator();
+	while(ar.hasNext()) {
+		System.out.println(ar.next());
+	}
+		
+	ArrayList<String> st=new ArrayList<String>(Arrays.asList("rama","Saanvika","Hari"));
+	System.out.println(st);
+	
+	}
+}
+
+ArrayList Methods:
+=================
+add();
+set();
+get();
+remove();
+size();
+addAll();
+clear();
+IndexOf();
+contains();
+Clone();
+removeIf();
+LastIndexOf();
+RetainAll();
+
+Synchronized ArrayList: Collections.synchronizedList(); method
+======================  CopyOnWriteArrayList() class
+
+* For add, remove methods we don't need explicit synchronization.
+* for fetch we have to use explicit synchronization.
+
+
+exp:
+
+package synchronizeArrayList;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+public class SynchronizedArrayList {
+
+	public static void main(String[] args) {
+		
+		List<String> arr=Collections.synchronizedList(new ArrayList<String>());
+		
+		arr.add("rama");
+		arr.add("Saanvi");
+		arr.add("Hari");
+		arr.add("Rupesh");
+		
+		System.out.println(arr);
+		
+		synchronized (arr) {
+			
+			Iterator<String> it=arr.iterator();
+			while(it.hasNext()) {
+				System.out.println(it.next());
+			}
+			
+		}
+
+	}
+
+}
+
+
+--->Map<I> :Key-Value pair <k,v>.
+   =======
+
+HashMap<C>: No ordering - no Indexing.
+----------  Do not allow duplicate values in key.
+	    Key allows only one null value whereas value allows more null values.
+            No thread safe.
+	    
+Syn: HashMap<datatype,datatype> map=new HashMap<datatype,datatype>();
+
+Methods:
+=======
+put();
+get();
+keyset();
+entrySet();
+remove();
+values();
+size();
+
+
+Exp:
+===
+
+package MapExp;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map.Entry;
+
+public class HashMapExp {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		HashMap<Integer, String> map=new HashMap<Integer, String>();
+		
+		map.put(1,"rama");
+		map.put(2,"devi");
+		map.put(3,"ramadevi");
+		map.put(4,"rama");
+		
+		System.out.println(map.get(3));
+		
+		//Iterator of keySet
+		
+		Iterator<Integer> it=map.keySet().iterator();
+		while(it.hasNext()) {
+			Integer key=it.next();
+			String value=map.get(key);
+			System.out.println(key+"="+value);
+			
+		}
+		//Iterator of EntrySet
+		Iterator<Entry<Integer,String>> itr=map.entrySet().iterator();
+		while(itr.hasNext()) {
+			Entry<Integer,String> keyValue=itr.next();
+			System.out.println(keyValue);
+			
+		}
+		
+		//Iterator using for each
+		
+		map.forEach((k,v)->System.out.println(k+v));
+		
+		map.remove(4);
+		System.out.println(map);
+		
+		//Compare two maps
+		
+		HashMap<Integer, String> map1=new HashMap<Integer, String>();
+		
+		map1.put(1,"rama");
+		map1.put(2,"Saanvika");
+		map1.put(3,"ramadevi");
+		map1.put(4,"jyothi");
+		map1.put(5,"jyothi");
+		
+       HashMap<Integer, String> map2=new HashMap<Integer, String>();
+		
+       map2.put(1,"hari");
+       map2.put(2,"rupesh");
+       map2.put(3,"ramadevi");
+       map2.put(4,"rama");
+       map2.put(6,"jyothi");
+		
+		System.out.println(map1.equals(map2));
+		System.out.println(map1.keySet().equals(map2.keySet()));
+		System.out.println(map1.values().equals(map2.values()));
+		
+		HashSet<Integer> set=new HashSet<Integer>(map1.keySet());
+		set.addAll(map2.keySet());
+		System.out.println(set);
+		set.removeAll(map2.keySet());
+		System.out.println(set);
+		
+		System.out.println(new ArrayList<>(map1.values()).
+				equals(new ArrayList<>(map2.values())));
+		
+	}
+
+}
+
+-->HashMap - hashing, Linked list, read-black tree, not threadsafe
+-->HashTable - hashing method, linkedlist - legacy class
+-->SynchronizedMap - threadsafe, slow performance
+-->ConcurrentHashMap - treadsafe, fast performance
+-->LinkedHashMap- double linkedlist, indexing
+-->TreeMap - sorted
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
