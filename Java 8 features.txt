@@ -1,0 +1,207 @@
+Java 8 features:
+===============
+1) Lambda Expressions
+2) Functional Interfaces
+3) Stream API
+4) Method References
+5) Optional classes
+6) Default and static methods
+
+link:https://docs.oracle.com/javase/8/docs/api/
+
+Functional Interface and Lambda Expression:
+
+
+Lambda Expression: No method name
+		   No return type
+		   
+
+example:
+=======
+
+package Java8;
+
+
+interface FunctionalInterface {
+	public void run();                   //Single abstract method
+}
+
+package Java8;
+
+public class FunctionalInterfaceImplementation  {
+	public static void main(String[] args) {	
+	FunctionalInterface fi=()->{System.out.println("Hello");};  // Lambda expression
+	fi.run();
+	}
+}
+
+
+package Java8;
+
+public class FunctionalInterfaceImplementation  {
+	public static void main(String[] args) {	
+		
+	print(()->{System.out.println("Hii");});
+	
+	}
+	private static void print(FunctionalInterface f) {
+		f.run();
+	}
+}
+
+Functional Interface:
+====================
+
+Only one abstract method
+More than one default and static methods
+@FunctionalInterface annotation
+To implement functionalInterface methods we use lambda expression.
+
+Predefined Functional interfaces:
+=================================
+
+Function<T,R> -> R apply(T t);
+Consumer<T> -> void accept(T t);
+Supplier<T> -> R get();
+Predicate<T,T> -> boolean test(T t);
+BiPredicate
+BiConsumer
+BiFunction
+UnaryOperator
+BinaryOperator
+
+
+Ex: Runnable - run()
+    Callable - call()
+    Comparable - compareTO()
+
+
+
+Function<T,R>: Accept one argument and provide the result.
+=============
+R apply(T t) -> Function method to accept Argument and return the value.
+
+Example:
+=======
+
+package Java8;
+
+import java.util.function.Function;
+
+class FunctionalInterface implements Function<String, Integer>{
+	
+	public Integer apply(String s) {
+		return s.length();
+	}
+	
+	public static void main(String[] args) {
+		Function<String, Integer> function=new FunctionalInterface();
+		System.out.println(function.apply("Java"));
+	}
+}
+
+Using Lambda Expression:
+========================
+
+Function<String,Integer> fun=(String s)->s.length();
+		System.out.println(fun.apply("Hiii"));
+
+
+
+Method Reference - Refer method to a Functional interface. It is easier form of lambda expression.
+================
+4 types:
+
+Static method - ClassName::StaticMethodName
+Instance method of a object - Object::InstanceMethodName
+Instance method of a arbitory object - ClassName::InstanceMethodName
+Constructor - ClassName::new
+
+
+Optional class: To avoid the nullPointerException.
+==============
+
+Static methods:
+==============
+.of();
+.empty();
+.ofNullable();
+.get()
+.isPresent();
+.ifPresent();
+.filter()
+.orElse();
+.orElseGet();
+.orElseThrow();
+.map();
+
+
+Default and static methods:
+===========================
+
+->Default method is an instance method inside the interface.
+->In Implementation classes by default it inherits.
+
+->Static method belongs to interface.
+->We cannot override 
+->we must call them using interface name.
+
+Stream Api:
+===========
+->No need to modify the original data.
+->Convert collections like list, set etc to stream and do actions like filter, mapping etc without any modification of original data.
+->flow: Source-filter-sort-map-collect/reduce.
+
+sort and print exp: 
+==================
+List<String> s=Arrays.asList("r","a","c");
+		s.stream().sorted().forEach(e->System.out.println(e));
+
+Combination of Intermediate operation and terminal operation.
+
+Intermediate operation:
+======================
+
+filter(); - predicate
+map();  - function
+district();
+sorted(); comparator
+limit()/skip();
+flatMap(); - function
+peek(); - consumer
+
+Terminal operation:
+===================
+
+forEach(); consumer
+forEachOrdered();
+collect();
+reduce();
+allMatch();
+count();
+anyMatch();
+noneMatch();
+findFirst();
+findAny();
+
+
+different sorted ways:
+======================
+
+sorted();
+sorted(comparator.naturalOrder);
+sorted((a,b)->a.compareTo(b));
+sorted(comparator.comparingLong(Emp::getAge));
+sorted(comparator.comparingLong(emp::getAge).reversed());
+
+comparingInt
+comparingDouble 
+if its string - comparing 
+
+
+
+
+
+
+
+
